@@ -4757,7 +4757,7 @@ function main_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.sl
 
 
 function main() {
-  (0,external_kolmafia_namespaceObject.print)("pvp-script is a TS continuation of UberPvPOptimizer");
+  (0,external_kolmafia_namespaceObject.print)("fightclub is a TS continuation of UberPvPOptimizer");
   $slots(main_templateObject || (main_templateObject = main_taggedTemplateLiteral([""]))).forEach(slot => (0,external_kolmafia_namespaceObject.equip)(template_string_$item(main_templateObject2 || (main_templateObject2 = main_taggedTemplateLiteral(["none"]))), slot));
   displayTopItems();
   bestGear($slot(main_templateObject3 || (main_templateObject3 = main_taggedTemplateLiteral(["hat"]))));
