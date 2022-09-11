@@ -4028,7 +4028,7 @@ var PropertiesManager = /*#__PURE__*/(/* unused pure expression or super */ null
   return PropertiesManager;
 }()));
 ;// CONCATENATED MODULE: ./src/lib.ts
-var lib_templateObject, lib_templateObject2, lib_templateObject3, lib_templateObject4, lib_templateObject5, lib_templateObject6, lib_templateObject7, lib_templateObject8, lib_templateObject9, lib_templateObject10, lib_templateObject11, lib_templateObject12, lib_templateObject13, lib_templateObject14, lib_templateObject15, lib_templateObject16, lib_templateObject17, lib_templateObject18, lib_templateObject19, lib_templateObject20, lib_templateObject21, lib_templateObject22, lib_templateObject23, lib_templateObject24, lib_templateObject25;
+var lib_templateObject, lib_templateObject2, lib_templateObject3, lib_templateObject4, lib_templateObject5, lib_templateObject6, lib_templateObject7, lib_templateObject8, lib_templateObject9, lib_templateObject10, lib_templateObject11, lib_templateObject12, lib_templateObject13, lib_templateObject14, lib_templateObject15, lib_templateObject16, lib_templateObject17, lib_templateObject18, lib_templateObject19, lib_templateObject20, lib_templateObject21, lib_templateObject22, lib_templateObject23, lib_templateObject24;
 
 function src_lib_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = src_lib_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -4060,17 +4060,13 @@ var pvpWeights = {
   verbosityWeight: 1.0,
   familiarWeightWeight: 1.0,
   autosellWeight: 1.0
-}; //other variables
-
+};
 var currentLetter;
 var nextLetter;
 var pvpMinis = generateMinigames();
 var famList = $familiars(lib_templateObject || (lib_templateObject = lib_taggedTemplateLiteral([""]))).filter(fam => have(fam));
 var famEquipList = famList.map(fam => (0,external_kolmafia_namespaceObject.familiarEquipment)(fam));
-var gearList = template_string_$items(lib_templateObject2 || (lib_templateObject2 = lib_taggedTemplateLiteral([""]))).filter(gear => ensureCanEquip(gear) && $slot(lib_templateObject3 || (lib_templateObject3 = lib_taggedTemplateLiteral(["none"]))) !== (0,external_kolmafia_namespaceObject.toSlot)(gear) && !(0,external_kolmafia_namespaceObject.stringModifier)(gear, "Modifiers").includes("Unarmed")).sort((gearA, gearB) => {
-  if (valuation(gearA) > valuation(gearB)) return -1;
-  if (valuation(gearA) < valuation(gearB)) return 1;else return 0;
-});
+var gearList = template_string_$items(lib_templateObject2 || (lib_templateObject2 = lib_taggedTemplateLiteral([""]))).filter(gear => ensureCanEquip(gear) && !(0,external_kolmafia_namespaceObject.stringModifier)(gear, "Modifiers").includes("Unarmed")).sort((gearA, gearB) => valuation(gearB) - valuation(gearA));
 var buyGear = property_get("PvP_buyGear", false); // Will auto-buy from mall if below threshold price and better than what you have
 
 var maxBuyPrice = property_get("autoBuyPriceLimit"); // Max price that will be considered to auto buy gear if you don't have it
@@ -4339,23 +4335,23 @@ function lib_getClass(item) {
 }
 
 function letterCount(gear, letter) {
-  if (gear === template_string_$item(lib_templateObject4 || (lib_templateObject4 = lib_taggedTemplateLiteral(["none"])))) return 0;
+  if (gear === template_string_$item(lib_templateObject3 || (lib_templateObject3 = lib_taggedTemplateLiteral(["none"])))) return 0;
   return (gear.toString().toLowerCase().match(new RegExp(letter, "g")) || []).length;
 }
 
 function hexCount(gear) {
-  if (gear === template_string_$item(lib_templateObject5 || (lib_templateObject5 = lib_taggedTemplateLiteral(["none"])))) return 0;
+  if (gear === template_string_$item(lib_templateObject4 || (lib_templateObject4 = lib_taggedTemplateLiteral(["none"])))) return 0;
   return (gear.toString().toLowerCase().match(/([a-f]|[0-9])/g) || []).length;
 }
 
 function numCount(gear) {
-  if (gear === template_string_$item(lib_templateObject6 || (lib_templateObject6 = lib_taggedTemplateLiteral(["none"])))) return 0;
+  if (gear === template_string_$item(lib_templateObject5 || (lib_templateObject5 = lib_taggedTemplateLiteral(["none"])))) return 0;
   return (gear.toString().match(/([0-9])/g) || []).length;
 }
 
 function nameLength(gear) {
-  if (gear === template_string_$item(lib_templateObject7 || (lib_templateObject7 = lib_taggedTemplateLiteral(["none"]))) && pvpMinis.includes("Laconic")) return 23;
-  if (gear === template_string_$item(lib_templateObject8 || (lib_templateObject8 = lib_taggedTemplateLiteral(["none"])))) return 0;
+  if (gear === template_string_$item(lib_templateObject6 || (lib_templateObject6 = lib_taggedTemplateLiteral(["none"]))) && pvpMinis.includes("Laconic")) return 23;
+  if (gear === template_string_$item(lib_templateObject7 || (lib_templateObject7 = lib_taggedTemplateLiteral(["none"])))) return 0;
   return gear.toString().length;
 }
 
@@ -4368,7 +4364,7 @@ function isChefStaff(gear) {
 }
 
 function ensureCanEquip(gear) {
-  return (0,external_kolmafia_namespaceObject.canEquip)(gear) && (!isChefStaff(gear) || (0,external_kolmafia_namespaceObject.myClass)() === template_string_$class(lib_templateObject9 || (lib_templateObject9 = lib_taggedTemplateLiteral(["Avatar of Jarlsberg"]))) || have(template_string_$skill(lib_templateObject10 || (lib_templateObject10 = lib_taggedTemplateLiteral(["Spirit of Rigatoni"])))));
+  return (0,external_kolmafia_namespaceObject.canEquip)(gear) && (!isChefStaff(gear) || (0,external_kolmafia_namespaceObject.myClass)() === template_string_$class(lib_templateObject8 || (lib_templateObject8 = lib_taggedTemplateLiteral(["Avatar of Jarlsberg"]))) || have(template_string_$skill(lib_templateObject9 || (lib_templateObject9 = lib_taggedTemplateLiteral(["Spirit of Rigatoni"])))));
 }
 
 function wikiLink(name) {
@@ -4376,7 +4372,7 @@ function wikiLink(name) {
 }
 
 function numericModifier2(gear, modifier) {
-  if (lib_getClass(gear) !== template_string_$class(lib_templateObject11 || (lib_templateObject11 = lib_taggedTemplateLiteral(["none"]))) && lib_getClass(gear) !== (0,external_kolmafia_namespaceObject.myClass)()) {
+  if (lib_getClass(gear) !== template_string_$class(lib_templateObject10 || (lib_templateObject10 = lib_taggedTemplateLiteral(["none"]))) && lib_getClass(gear) !== (0,external_kolmafia_namespaceObject.myClass)()) {
     return pvpWeights.negativeClassWeight;
   }
 
@@ -4439,9 +4435,9 @@ function valuation(gear) {
 
   if (pvpMinis.includes("Lightest Load")) {
     switch ((0,external_kolmafia_namespaceObject.toSlot)(gear)) {
-      case $slot(lib_templateObject12 || (lib_templateObject12 = lib_taggedTemplateLiteral(["hat"]))):
-      case $slot(lib_templateObject13 || (lib_templateObject13 = lib_taggedTemplateLiteral(["shirt"]))):
-      case $slot(lib_templateObject14 || (lib_templateObject14 = lib_taggedTemplateLiteral(["pants"]))):
+      case $slot(lib_templateObject11 || (lib_templateObject11 = lib_taggedTemplateLiteral(["hat"]))):
+      case $slot(lib_templateObject12 || (lib_templateObject12 = lib_taggedTemplateLiteral(["shirt"]))):
+      case $slot(lib_templateObject13 || (lib_templateObject13 = lib_taggedTemplateLiteral(["pants"]))):
         value += (110 - (0,external_kolmafia_namespaceObject.getPower)(gear)) * pvpWeights.powerWeight;
     }
   }
@@ -4608,7 +4604,7 @@ function gearString(gear) {
     gearString += ", +".concat(famWeight, " Familiar Weight");
   }
 
-  if (pvpMinis.includes("Lightest Load") && $slots(lib_templateObject15 || (lib_templateObject15 = lib_taggedTemplateLiteral(["hat, pants, shirt"]))).includes((0,external_kolmafia_namespaceObject.toSlot)(gear))) gearString += ", Power: ".concat((0,external_kolmafia_namespaceObject.getPower)(gear));
+  if (pvpMinis.includes("Lightest Load") && $slots(lib_templateObject14 || (lib_templateObject14 = lib_taggedTemplateLiteral(["hat, pants, shirt"]))).includes((0,external_kolmafia_namespaceObject.toSlot)(gear))) gearString += ", Power: ".concat((0,external_kolmafia_namespaceObject.getPower)(gear));
   if ((0,external_kolmafia_namespaceObject.availableAmount)(gear) > 0) gearString += ", owned by player";else if ((0,external_kolmafia_namespaceObject.npcPrice)(gear) > 0) gearString += ", for sale by npc for ".concat((0,external_kolmafia_namespaceObject.npcPrice)(gear));else if ((0,external_kolmafia_namespaceObject.historicalPrice)(gear) > 0) gearString += ", for sale in  the mall for ".concat((0,external_kolmafia_namespaceObject.historicalPrice)(gear));
   gearString += ", value: ".concat(valuation(gear));
   return gearString;
@@ -4621,7 +4617,7 @@ function gearString(gear) {
 
 
 function bestGear(slot) {
-  var adjustedSlot = $slots(lib_templateObject16 || (lib_templateObject16 = lib_taggedTemplateLiteral(["acc2, acc3"]))).includes(slot) ? $slot(lib_templateObject17 || (lib_templateObject17 = lib_taggedTemplateLiteral(["acc1"]))) : slot;
+  var adjustedSlot = $slots(lib_templateObject15 || (lib_templateObject15 = lib_taggedTemplateLiteral(["acc2, acc3"]))).includes(slot) ? $slot(lib_templateObject16 || (lib_templateObject16 = lib_taggedTemplateLiteral(["acc1"]))) : slot;
   var slotGear = gearList.filter(gear => (0,external_kolmafia_namespaceObject.toSlot)(gear) === adjustedSlot);
 
   var _iterator = src_lib_createForOfIteratorHelper(slotGear),
@@ -4642,7 +4638,7 @@ function bestGear(slot) {
       } //this simultaneously checks if a piece can be equipped and tries to do so
 
 
-      if (valuation(gear) > 0 && (ensureCanEquip(gear) && gearUp(slot, gear) || slot === $slot(lib_templateObject18 || (lib_templateObject18 = lib_taggedTemplateLiteral(["familiar"]))) && canAcquire(gear) && (famEquipList.includes(gear) ? (0,external_kolmafia_namespaceObject.useFamiliar)(famList[famEquipList.indexOf(gear)]) : true) && ensureCanEquip(gear) && gearUp(slot, gear))) {
+      if (valuation(gear) > 0 && (ensureCanEquip(gear) && gearUp(slot, gear) || slot === $slot(lib_templateObject17 || (lib_templateObject17 = lib_taggedTemplateLiteral(["familiar"]))) && canAcquire(gear) && (famEquipList.includes(gear) ? (0,external_kolmafia_namespaceObject.useFamiliar)(famList[famEquipList.indexOf(gear)]) : true) && ensureCanEquip(gear) && gearUp(slot, gear))) {
         (0,external_kolmafia_namespaceObject.printHtml)("<b>Best Available ".concat(slot.toString(), ":</b> ").concat(gearString(gear)));
         (0,external_kolmafia_namespaceObject.printHtml)((0,external_kolmafia_namespaceObject.stringModifier)(gear, "Modifiers"));
         break;
@@ -4655,10 +4651,10 @@ function bestGear(slot) {
   }
 }
 function bestHands() {
-  var dualWield = have(template_string_$skill(lib_templateObject19 || (lib_templateObject19 = lib_taggedTemplateLiteral(["Double-Fisted Skull Smashing"]))));
+  var dualWield = have(template_string_$skill(lib_templateObject18 || (lib_templateObject18 = lib_taggedTemplateLiteral(["Double-Fisted Skull Smashing"]))));
   if (dualWield) (0,external_kolmafia_namespaceObject.printHtml)("<b>Player can dual wield 1-hand weapons.</b>");
-  var weaponList = gearList.filter(item => (0,external_kolmafia_namespaceObject.toSlot)(item) === $slot(lib_templateObject20 || (lib_templateObject20 = lib_taggedTemplateLiteral(["weapon"]))));
-  var offhandList = gearList.filter(item => (0,external_kolmafia_namespaceObject.toSlot)(item) === $slot(lib_templateObject21 || (lib_templateObject21 = lib_taggedTemplateLiteral(["off-hand"]))));
+  var weaponList = gearList.filter(item => (0,external_kolmafia_namespaceObject.toSlot)(item) === $slot(lib_templateObject19 || (lib_templateObject19 = lib_taggedTemplateLiteral(["weapon"]))));
+  var offhandList = gearList.filter(item => (0,external_kolmafia_namespaceObject.toSlot)(item) === $slot(lib_templateObject20 || (lib_templateObject20 = lib_taggedTemplateLiteral(["off-hand"]))));
   var primaryWeapon = weaponList[0];
   var secondaryWeapon = weaponList[0];
   var bestOffhand = offhandList[0];
@@ -4683,7 +4679,7 @@ function bestHands() {
     _iterator2.f();
   }
 
-  bestGear($slot(lib_templateObject22 || (lib_templateObject22 = lib_taggedTemplateLiteral(["weapon"]))));
+  bestGear($slot(lib_templateObject21 || (lib_templateObject21 = lib_taggedTemplateLiteral(["weapon"]))));
   if ((0,external_kolmafia_namespaceObject.availableAmount)(primaryWeapon) - (0,external_kolmafia_namespaceObject.equippedAmount)(primaryWeapon) > 1 || (0,external_kolmafia_namespaceObject.historicalPrice)(primaryWeapon) < maxBuyPrice && (0,external_kolmafia_namespaceObject.historicalPrice)(primaryWeapon) > 0 && !isChefStaff(primaryWeapon)) secondaryWeapon = primaryWeapon;else {
     var _iterator3 = src_lib_createForOfIteratorHelper(weaponList.slice(weaponIndex)),
         _step3;
@@ -4712,17 +4708,17 @@ function bestHands() {
   }
 
   if (!dualWield || valuation2(primaryWeapon, bestOffhand) > valuation2(primaryWeapon, secondaryWeapon)) {
-    gearUp($slot(lib_templateObject23 || (lib_templateObject23 = lib_taggedTemplateLiteral(["off-hand"]))), bestOffhand);
+    gearUp($slot(lib_templateObject22 || (lib_templateObject22 = lib_taggedTemplateLiteral(["off-hand"]))), bestOffhand);
     (0,external_kolmafia_namespaceObject.printHtml)("<b>Best Available off-hand:</b> ".concat(gearString(bestOffhand)));
     (0,external_kolmafia_namespaceObject.printHtml)((0,external_kolmafia_namespaceObject.stringModifier)(bestOffhand, "Modifiers"));
   } else {
-    gearUp($slot(lib_templateObject24 || (lib_templateObject24 = lib_taggedTemplateLiteral(["off-hand"]))), secondaryWeapon);
+    gearUp($slot(lib_templateObject23 || (lib_templateObject23 = lib_taggedTemplateLiteral(["off-hand"]))), secondaryWeapon);
     (0,external_kolmafia_namespaceObject.printHtml)("<b>Best 2nd weapon:</b> ".concat(gearString(secondaryWeapon)));
     (0,external_kolmafia_namespaceObject.printHtml)((0,external_kolmafia_namespaceObject.stringModifier)(secondaryWeapon, "Modifiers"));
   }
 }
 function displayTopItems() {
-  $slots(lib_templateObject25 || (lib_templateObject25 = lib_taggedTemplateLiteral(["hat, back, shirt, weapon, off-hand, pants, acc1, familiar"]))).forEach(slot => {
+  $slots(lib_templateObject24 || (lib_templateObject24 = lib_taggedTemplateLiteral(["hat, back, shirt, weapon, off-hand, pants, acc1, familiar"]))).forEach(slot => {
     var slotGear = gearList.filter(gear => (0,external_kolmafia_namespaceObject.toSlot)(gear) === slot);
     (0,external_kolmafia_namespaceObject.printHtml)("<b>Slot <i>".concat(slot.toString(), "</i> items considered: ").concat(slotGear.length, " printing top items in slot:</b>"));
 
